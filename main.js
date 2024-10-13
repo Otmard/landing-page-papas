@@ -1,4 +1,7 @@
 import "./style.css";
+import Swiper from "swiper";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
 const navMenu = document.getElementById("nav-menu");
 const navClose = document.getElementById("nav-close");
 const navTogle = document.getElementById("nav-togle");
@@ -26,10 +29,24 @@ navLink.forEach((link) => {
 });
 const shadowHeader = () => {
 	const header = document.getElementById("header");
-  // console.log(header);
-  
+	// console.log(header);
+
 	window.scrollY > 50
 		? header.classList.add("shadow-header")
 		: header.classList.remove("shadow-header");
 };
 window.addEventListener("scroll", shadowHeader);
+
+
+const swiper = new Swiper(".favorites__swiper", {
+	modules: [Autoplay],
+	loop: true,
+	grabCursor: true,
+	slidesPerView:'auto',
+	centeredSlides: 'auto',
+	autoplay:{
+		delay: 3000,
+		disableOnInteraction: false,
+		stopOnLastSlide: false,
+	}
+});
