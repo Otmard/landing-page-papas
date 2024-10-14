@@ -37,16 +37,46 @@ const shadowHeader = () => {
 };
 window.addEventListener("scroll", shadowHeader);
 
-
 const swiper = new Swiper(".favorites__swiper", {
-	modules: [Autoplay],
+	// modules: [Autoplay],
 	loop: true,
 	grabCursor: true,
-	slidesPerView:'auto',
-	centeredSlides: 'auto',
-	autoplay:{
-		delay: 3000,
-		disableOnInteraction: false,
-		stopOnLastSlide: false,
-	}
+	slidesPerView: "auto",
+	centeredSlides: "auto",
+	// autoplay:{
+	// 	delay: 3000,
+	// 	disableOnInteraction: false,
+	// 	stopOnLastSlide: false,
+	// }
 });
+
+const scrollUp = () => {
+	const scrollUp = document.getElementById("scrollup");
+	window.scrollY >= 450
+		? scrollUp.classList.add("show-scroll")
+		: scrollUp.classList.remove("show-scroll");
+};
+window.addEventListener("scroll", scrollUp);
+
+const sections = document.querySelectorAll("section[id]");
+
+const scrollActive = () => {
+	const scrollDown = window.scrollY;
+	sections.forEach((current) => {
+		const sectionHeight = current.offsetHeight,
+			sectionTop = current.offsetTop - 58,
+			sectionId = current.getAttribute("id"),
+			sectionClass = document.querySelector(
+				".nav__menu a[href*=" + sectionId + "]"
+			);
+		if (
+			scrollDown > sectionTop &&
+			scrollDown <= sectionTop + sectionHeight
+		) {
+			sectionClass.classList.add("active-link");
+		} else {
+			sectionClass.classList.remove("active-link");
+		}
+	});
+};
+window.addEventListener("scroll", scrollActive);
